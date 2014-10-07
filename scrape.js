@@ -79,10 +79,10 @@ function getCode(results) {
           },
           function(error, response, body) {
             var file_title = result.title.replace(/[^a-z0-9]/gi, '_');
-            var gooz = body.match(/<textarea id="code" name='code'>[\s\S]*<\/textarea>/g);
+            var code_match = body.match(/<textarea id="code" name='code'>[\s\S]*<\/textarea>/g);
 
             try {
-              var code = gooz[0].replace(/<textarea id="code" name='code'>/,'').replace(/<\/textarea>/,'').trim();
+              var code = code_match[0].replace(/<textarea id="code" name='code'>/,'').replace(/<\/textarea>/,'').trim();
               fs.writeFile("./challenges/"+file_title+".js", code, function(err) {
                 if(err) {
                   console.log(err);
